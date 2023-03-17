@@ -2,7 +2,7 @@ package leetcode;
 
 import java.util.Arrays;
 
-public class day11 {
+public class day11最多容器的水 {
     public static int maxArea(int[] height) {
         int maxSize=0;
         int left=0;
