@@ -9,7 +9,7 @@ public class 背包问题01_动态规划 {
         for(int i=0;i<weight.length;i++){
             dp[i][0]=0;
         }
-        for(int j=0;j<bagSize;j++){
+        for(int j=0;j<=bagSize;j++){
             dp[0][j]=weight[0]<=j?weight[0]:0;
         }
         for(int i=1;i<weight.length;i++){
@@ -21,26 +21,40 @@ public class 背包问题01_动态规划 {
         }
         return dp[weight.length-1][bagSize-1];
     }
-//  一维数组推导公式：dp[j]:容量为J的背包所能装的最大价值。dp[j]=max(dp[j],dp[j-w[i]]+v[i])
+//  由二位推倒公式可知，dp[i]是由dp[i-1]推导出来的，因此一维数组推导公式：dp[j]:容量为J的背包所能装的最大价值。
+//  从i-1——>i时，dp[j]=max(dp[j],dp[j-w[i]]+v[i])
     public int maxValue2(int[] weight,int value[],int bagSize){
         int[] dp = new int[bagSize + 1];
         dp[0]=0;
 
-        for(int j=1;j<bagSize;j++){
-
+        for(int i=1;i<weight.length;i++){
+            for(int j=bagSize;j>=1;j--){
+                if(j < weight[i]){
+                    dp[j]=dp[j];
+                } else{
+                    dp[j]=Math.max(dp[j],dp[j-weight[i]]+value[i]);
+                }
+            }
         }
-        return 0;
+        return dp[bagSize];
     }
-    // 现有一笔经费可以报销一定额度的发票。允许报销的发票类型包括买图书（A类）、文具（B类）、差旅（C类），要求每张发票的总额不得超过1000元，每张发票上，单项物品的价值不得超过600元。
-    //发票问题：开发票有N个商品 ,每个商品价格不同,数量不同,发票固定额度为L,如何合理分配商品到每张发票,使发票的利用率达到最大
+    //现有一笔经费可以报销一定额度的发票。允许报销的发票类型包括买图书（A类）、文具（B类）、差旅（C类），要求每张发票的总额不得超过1000元，每张发票上，单项物品的价值不得超过600元。
+//dp[i][j]:前i个商品不超过J价值下最大的价值，dp[i][j]=max(dp[i-1][j]+dp[i-1][j-v[i]]+v[i])
+    public int maxPrice(int v[],int vNum){
+        int[] dp = new int[vNum + 1];
+        dp[0]=0;
 
-    public int maxPrice(int v[],int wNum){
-        return 0;
+        for(int i=1;i<v.length;i++){
+            for(int j=vNum;j>=1;j--){
+                if(j < v[i]){
+                    dp[j]=dp[j];
+                } else{
+                    dp[j]=Math.max(dp[j],dp[j-v[i]]+v[i]);
+                }
+            }
+        }
+        return dp[vNum];
     }
 
 
-    public void DFS(int index,int v[],double sum){
-//        if()
-
-    }
 }
