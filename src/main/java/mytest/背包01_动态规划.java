@@ -1,6 +1,6 @@
 package mytest;
 
-public class 背包问题01_动态规划 {
+public class 背包01_动态规划 {
 
 // 01背包问题：一共有 N 件物品，重量为 weight[i]，价值为 value[i]。在总重量不超过背包承载上限 W 的情况下，能够装入背包的最大价值是多少？
 //  dp[i][j]:前i件物品不超过J重量情况下的最大值 二维数组推导公式：dp[i][j]=max(dp[i-1][j],dp[i-1][j-weight[i]]+value[i])
