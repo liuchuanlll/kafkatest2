@@ -12,7 +12,7 @@ import java.util.Stack;
  * @Description
  */
 public class 拓扑排序 {
-
+//广度优先
     public static void main(String[] args) {
 //        String[] courses = {"C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9"};
 //        String[][] relations=new String[][]{{"C1","C3"},{"C1","C8"},{"C2","C3"},{"C3","C4"},{"C5","C4"},{"C2","C5"},{"C4","C5"},{"C4","C7"},{"C9","C7"},{"C8","C9"}};
@@ -43,5 +43,9 @@ public class 拓扑排序 {
         }
         System.out.println(Arrays.toString(ints));//ints数组所有值均为0则说明无环
         System.out.println(count==courses);//true说明输出的顶点数==课程数，无环。
+    }
+    //深度优先
+    public static void main2(String[] args) {
+        //、、、待补充
     }
 }
