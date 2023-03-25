@@ -10,14 +10,14 @@ public class 大根堆排序 {
     //构成初始堆就是把待排序的元素按照堆的定义调整为堆，其中S'(i)>=S'(2i+1)和S'(i)>=S'(2i+2)，其中0<=i<=n/2-1,为此需要从对应的完全二叉树的最大编号的分支节点（n/2-1）起，至整个树根节点为止，依次进行筛运算，整个树就构成了一个初始堆
     //带排序的n个元素放于a[n]中，当以a[i+1]~a[n-1]的每一个元素都以构成堆时，则对啊a[i]进行筛选使以a[i]构成堆的算法为
     void sift(int a[],int i,int n){//n为节点数
-        int left=2*i+1<n?2*i+1:-1;
-        while(left>0){//有叶子节点
+        int left=2*i+1;
+        while(left<n){//有叶子节点
             int large=left;
             if(left+1<n&&a[left+1]>=a[left])  large=left+1;
             if(a[i]<a[large]) {
                 swap(a,i,large);
                 i=large;
-                left=2*large+1<n?2*large+1:-1;
+                left=2*large+1;
             }else{
                 break;
             }
