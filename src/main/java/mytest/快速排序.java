@@ -2,13 +2,15 @@ package mytest;
 
 import java.util.Arrays;
 
-public class 快速排序 {//分割交换原理
+public class 快速排序 {//分割交换原理，
+    // 时间复杂度：https://zhuanlan.zhihu.com/p/341201904  ：T(n) =2 * T(n/2) + n  =  n-1+n-2+...+n-2^k
+
     public int[] quickSort(int[] array,int left,int right){
 
         int start=left+1;
         int end=right;
         while(start<=end){
-            while(array[start]<=array[left]&&start<=end) start++;
+            while(start<array.length&&array[start]<=array[left]&&start<=end) start++;
             while(array[end]>=array[left]&&start<=end) end--;
             if(start<end){
                 swap(array, start, end);
@@ -25,7 +27,7 @@ public class 快速排序 {//分割交换原理
         return array;
     }
 
-    private void swap(int[] array, int start, int end) {
+    public static void swap(int[] array, int start, int end) {
         int temp = array[start];
         array[start] = array[end];
         array[end] = temp;
@@ -33,7 +35,7 @@ public class 快速排序 {//分割交换原理
 
     public static void main(String[] args) {
         快速排序 quickSort = new 快速排序();
-        int[] array = {4, 7, 5, 6, 71, 12, 2, 1, 536, 1};
+        int[] array = {2, 1};
         quickSort.quickSort(array,0,array.length-1);
         System.out.println(Arrays.toString(array));
 
