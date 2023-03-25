@@ -25,7 +25,7 @@ public class 快速排序 {//分割交换原理
         return array;
     }
 
-    private void swap(int[] array, int start, int end) {
+    public static void swap(int[] array, int start, int end) {
         int temp = array[start];
         array[start] = array[end];
         array[end] = temp;
