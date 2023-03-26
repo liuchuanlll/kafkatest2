@@ -38,6 +38,9 @@ public class 背包01_动态规划 {
         }
         return dp[bagSize];
     }
+
+
+
     //现有一笔经费可以报销一定额度的发票。允许报销的发票类型包括买图书（A类）、文具（B类）、差旅（C类），要求每张发票的总额不得超过1000元，每张发票上，单项物品的价值不得超过600元。
 //dp[i][j]:前i个商品不超过J价值下最大的价值，dp[i][j]=max(dp[i-1][j]+dp[i-1][j-v[i]]+v[i])
     public int maxPrice(int v[],int vNum){
