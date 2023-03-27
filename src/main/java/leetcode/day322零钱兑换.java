@@ -1,9 +1,7 @@
 package leetcode;
 
 public class day322零钱兑换 {//https://blog.csdn.net/m0_60777643/article/details/122222928
-//dp[i][j]：前i+1种硬币在j金额情况下所需最少的硬币。dp[0][j]=j%v0==0？j/v0:-1    dp[i][0]=0
-    // dp[1][1]=min(dp[0][1]==-1？（j%vi==0？j/v0:-1）：dp[i-1][j],dp[i][j-vi]+1）
-    // 理解：若在0-max[i]中选过vi，则说明在当前剩余容量vi下是最优解。且以当前物品重量为一次循环，每次都要加
+
 
     //方法一：暴力递归
     int min=-1;
@@ -22,17 +20,43 @@ public class day322零钱兑换 {//https://blog.csdn.net/m0_60777643/article/det
             coinChange(coins,amount,currentAmount+coins[i],currentCoinNumber+1);
         }
     }
-//    方法二记忆化搜索：使用数组 memo[]来保存节点的值,memo[n]表示钱币n可以被换取的最少的硬币数，不能换取就为 −1
-    int memo[];
+//    方法二记忆化搜索
+    int memo[];//memo[j]表示钱币可以在j额度被换取的最少的硬币数，不能换取就为 −1。F(s)=min( F(s-c1),F(s-c2),F(s-c3))+1
     public int coinChange2(int[] coins, int amount) {
         memo = new int[amount];
         coinChange3(coins,amount);
         return min;
     }
 
-    private void coinChange3(int[] coins, int amount) {
-
+    private int coinChange3(int[] coins, int amount) {
+        if(amount==0) return -1;
+        if(amount<0) return -1;
+        if(memo[amount-1]!=0){
+            return memo[amount-1];
+        }
+        int min=-1;
+        for(int i=0;i<coins.length;i++){
+            int res = coinChange3(coins, amount - coins[i]);
+            int res2=res==-1?-1:res+1;
+            min=min==-1?res2:res==-1?min:Math.min(min, res2);//min等于（-1，普通值）*（re2s=-1，普通值）四类
+        }
+        return memo[amount]=min;
     }
+    //方法三动态规划：F(s)=min( F(s-c1),F(s-c2),F(s-c3))+1
+    public int coinChange4(int[] coins, int amount) {
+        int[] ints = new int[amount+1];
+        ints[0]=0;
+        for(int i=0;i<amount;i++){
+            int min=-1;
+            for(int j=0;j<coins.length;j++){
+                int fs_ci=amount<coins[j]?memo[amount-coins[j]]+1:-1;
+                min=min==-1?fs_ci:fs_ci==-1?min:Math.min(min,fs_ci);
+            }
+            ints[amount]=min;
+        }
+        return ints[amount-1];
+    }
+
 
     public static void main(String[] args) {
         day322零钱兑换 day322 = new day322零钱兑换();

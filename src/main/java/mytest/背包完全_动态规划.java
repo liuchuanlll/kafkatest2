@@ -9,8 +9,10 @@ package mytest;
 public class 背包完全_动态规划 {
 //    dp[i][j]:前i种物品不超过J重量情况下的最大值(可重复放)，k为装入第i种物品的件数, k <= j/w[i]，01背包可看做k为0,1
 //    二维数组推导公式：dp[i][j]=max(dp[i-1][j]  ,  dp[i-1][j-weight[i]]+value[i],  ... , dp[i-1][j-K*weight[i]]+K*value[i])
-//    方法一算法略
-
+//    方法一三重循环，算法略
+//for(i=0..weight.length)
+//    for(j=0..bagsize)
+//        for(k=0..j/w[i])
 
     /**
      * 方法二
@@ -20,6 +22,7 @@ public class 背包完全_动态规划 {
      * dp[i][j-w]= max( dp[i-1][j-w] ,dp[i-1][j-w-w]+v,  ...  , dp[i-1][j-w-(k-1)w]+(K-1)v)                     1<=k1<=j/w
      *           =max(                 dp[i-1][j-w]+v  ...                                    dp[i-1][j-Kw]+Kv      )-v
      * 第五行带入第1行，得dp[i][j]=max(dp[i-1][j] ,dp[i][j-w]+v)
+     *
      */
     public int maxValue(int[] weight,int value[],int bagSize){
         int[][] dp = new int[weight.length][bagSize+1];
@@ -35,5 +38,19 @@ public class 背包完全_动态规划 {
             }
         }
         return dp[weight.length-1][bagSize-1];
+    }
+
+// 方法三：通俗理解dp[j]=max(dp[j] ,dp[j-wi]+vi)。 maxdp[j]=max(上一件装第一个，,,上一件装第i个)
+    public int maxValue2(int[] weight,int value[],int bagSize){
+        int[] dp = new int[bagSize+1];
+        for(int i=0;i<weight.length;i++){
+            dp[0]=0;
+        }
+        for(int j=1;j<=bagSize;j++){
+            for(int i=1;i<weight.length;i++){
+                dp[j] =j < weight[i]? dp[j]:Math.max(dp[j] , dp[j-weight[i]] + value[i]);
+            }
+        }
+        return dp[bagSize-1];
     }
 }
