@@ -21,9 +21,9 @@ public class 背包01_记忆化递归 {
         if(memo[index][c] != 0)
             return memo[index][c];
         int res = dfs2(weight, price, index-1, c);
+        int res2=0;
         if(c >= weight[index])
-        res = Math.max(res, price[index] + dfs2(weight, price, index - 1, c - weight[index]));
-        memo[index][c] = res;
-        return res;
+             res2 = price[index] + dfs2(weight, price, index - 1, c - weight[index]);
+        return memo[index][c] = Math.max(res, res2);
     }
 }
