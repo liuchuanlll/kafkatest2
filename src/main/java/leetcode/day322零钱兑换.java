@@ -23,16 +23,16 @@ public class day322零钱兑换 {//https://blog.csdn.net/m0_60777643/article/det
 //    方法二记忆化搜索
     int memo[];//memo[j]表示钱币可以在j额度被换取的最少的硬币数，不能换取就为 −1。F(s)=min( F(s-c1),F(s-c2),F(s-c3))+1
     public int coinChange2(int[] coins, int amount) {
-        memo = new int[amount];
+        memo = new int[amount+1];
         coinChange3(coins,amount);
-        return min;
+        return memo[amount];
     }
 
     private int coinChange3(int[] coins, int amount) {
         if(amount==0) return -1;
         if(amount<0) return -1;
-        if(memo[amount-1]!=0){
-            return memo[amount-1];
+        if(memo[amount]!=0){
+            return memo[amount];
         }
         int min=-1;
         for(int i=0;i<coins.length;i++){
@@ -54,7 +54,7 @@ public class day322零钱兑换 {//https://blog.csdn.net/m0_60777643/article/det
             }
             ints[amount]=min;
         }
-        return ints[amount-1];
+        return ints[amount];
     }
 
 
