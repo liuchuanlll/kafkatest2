@@ -1,5 +1,8 @@
 package leetcode;
 
+import javax.lang.model.element.VariableElement;
+import java.util.ArrayList;
+
 /**
  * @author kfzx-liuc02
  * @version 1.0
@@ -7,7 +10,7 @@ package leetcode;
  * @Description
  */
 public class day416分割等和子集 {
-//    一、暴力回溯自下而上
+//    一、暴力回溯自下而上  超时
     public boolean canPartition(int[] nums) {
         int sum=0;
         for(int n:nums){
@@ -19,15 +22,17 @@ public class day416分割等和子集 {
         return b;
     }
     public boolean canPartition(int[] nums,int sum,int total,int index,boolean exist) {
-        if(sum==total||exist==true) return true;
+        if(sum==total||exist==true)
+            return true;
         if(total>sum) return false;
         for(int i=index;i<nums.length;i++){
-            total+=nums[i];
-            exist = canPartition(nums, sum, total, index + 1,exist)||exist;//此处||exist可以不要
+            exist = canPartition(nums, sum, total+nums[i], i + 1,exist);//此处||exist可以不要
         }
         return exist;
     }
-    //    二、暴力递归自上而下 b[i][sum]=b[i-1][sum]||b[i][sum-n[i]]
+
+
+    //    二、暴力递归自上而下 b[i][sum]=b[i-1][sum]||b[i][sum-n[i]]  超时
     public boolean canPartition2(int[] nums) {
         int sum=0;
         for(int n:nums){
@@ -43,11 +48,14 @@ public class day416分割等和子集 {
         if(remain<0||i<0) {
             return false;
         }
+        if(remain==0) {
+            return true;
+        }
         boolean b = canPartition2(nums, remain, i - 1) || canPartition2(nums, remain - nums[i], i - 1);
         return b;
     }
-
-    boolean exist[][];
+    //    三、记忆化递归自上而下 b[i][sum]=b[i-1][sum]||b[i][sum-n[i]]  89 ms
+    int exist[][];//此处不能用boolean，因为需要记录三种状态
     public boolean canPartition3(int[] nums) {
         int sum=0;
         for(int n:nums){
@@ -55,20 +63,25 @@ public class day416分割等和子集 {
         }
         if(sum%2!=0) return false;
         sum=sum/2;
-        exist=new boolean[nums.length][sum+1];
-        boolean b = canPartition3(nums, sum, nums.length-1);
-        return b;
+        exist=new int[nums.length][sum+1];
+        int b = canPartition3(nums, sum, nums.length-1);
+        return b==1;
     }
 
-    private boolean canPartition3(int[] nums, int remain, int i) {
+    private int canPartition3(int[] nums, int remain, int i) {
         if(remain<0||i<0) {
-            return false;
+            return -1;
         }
-        if(exist[i][remain]==true) return true;//递归搜索多加这一句
-        exist[i][remain]=canPartition3(nums, remain, i-1)||canPartition3(nums,remain-nums[i], i-1);
+        if(remain==0) {
+            return 1;
+        }
+        if(exist[i][remain]>0) return 1;//递归搜索多加这一句
+        if(exist[i][remain]<0) return -1;//递归搜索多加这一句
+        exist[i][remain]=Math.max(canPartition3(nums, remain, i-1),canPartition3(nums,remain-nums[i], i-1));
         return exist[i][remain];
     }
-    //动态规划：b[i][sum]=b[i-1][sum]||b[i][sum-n[i]]
+
+    //方法四动态规划：b[i][sum]=b[i-1][sum]||b[i][sum-n[i]]  33 ms
     public boolean canPartition4(int[] nums) {
         int sum=0;
         for(int n:nums){
@@ -76,7 +89,21 @@ public class day416分割等和子集 {
         }
         if(sum%2!=0) return false;
         sum=sum/2;
-        boolean[][] exist2=new boolean[nums.length][sum+1];
-        for(int i=0;i<)
+        boolean[] b=new boolean[sum+1];
+        b[0]=true;
+        for(int i=0;i<nums.length;i++){
+            for(int j=sum;j>0;j--){
+                if(j>=nums[i]){
+                    b[j]=b[j]||b[j-nums[i]];
+                }
+            }
+        }
+        return b[sum];
+    }
+    public static void main(String[] args) {
+        day416分割等和子集 day416 = new day416分割等和子集();
+        int[] nums = {1,2,5};
+        boolean b = day416.canPartition4(nums);
+        System.out.println(b);
     }
 }
