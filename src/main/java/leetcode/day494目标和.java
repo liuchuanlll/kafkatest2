@@ -16,7 +16,7 @@ public class day494目标和 {
         int targetSumWays2 = findTargetSumWays(nums, remain - nums[index], index + 1, currentWay);
         return targetSumWays+targetSumWays2;
     }
-    //    方法二记忆化递归 SumWays[i][j]=SumWays[i-1][j-n[i-1]]+SumWays[i-1][j+n[i-1]]
+//        方法二记忆化递归 SumWays[i][j]=SumWays[i-1][j-n[i-1]]+SumWays[i-1][j+n[i-1]]
     Map<Integer,Integer> SumWays;
     public int findTargetSumWays2(int[] nums, int target) {
         SumWays=new HashMap();

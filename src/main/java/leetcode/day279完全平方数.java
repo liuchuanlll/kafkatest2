@@ -41,16 +41,16 @@ public class day279完全平方数 {
             int  i1= numSquares4(n -i*i);
             amount = Math.min(amount, i1 +1);
         }
-        return amount;
+        return numSquares[n]=amount;
     }
 
     //    4、动态规划 F(n)=min(f(n-sqrt*sqrt)...f(n-1*1))+1
-    private int numSquares5(int n) {
+    public int numSquares5(int n) {
         int[] n1 = new int[n + 1];
         if(n==0) return 0;
         for(int i=1;i<=n;i++){
             n1[i]=i;
-            for(int j=1;j<=(int) Math.sqrt(i);j++){
+            for(int j=1;j<=(int) Math.sqrt(i);j++){//j<=(int) Math.sqrt(i) 改为j*j<=i时间降低一半
                 n1[i]=Math.min(n1[i],n1[i-j*j]+1);
             }
         }
@@ -59,7 +59,7 @@ public class day279完全平方数 {
     }
     public static void main(String[] args) {
         day279完全平方数 day279 = new day279完全平方数();
-        int i = day279.numSquares(12);
+        int i = day279.numSquares5(12);
         System.out.println(i);
     }
 }
