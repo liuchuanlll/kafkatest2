@@ -32,7 +32,7 @@ public class day131回溯_分割回文串 {
        }
     }
     // 判断此区间内的字符串是否为 回文子串
-    private boolean isFlag(String str){
+    public static boolean isFlag(String str){
         char[] s=str.toCharArray();
         int begin=0;
         int end=s.length-1;
