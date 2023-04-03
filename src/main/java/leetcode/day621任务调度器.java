@@ -11,6 +11,7 @@ public class day621任务调度器 {//只求最值，不输出过程
         }
         Arrays.sort(cnt);
 //        int[] interval=new int[26];
-cnt[0]*n-
+//cnt[0]*n-
+        return 0;
     }
 }
