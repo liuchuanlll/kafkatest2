@@ -33,10 +33,10 @@ public class day215数组中的第K个最大元素 {
                 start++;end--;
             }
         }// 结束刚好end+1=start。数组为a[left],small[left+1,end],large[start,right]
-        swap(nums, left, end);//不用整个数组交换,仅交换a和small[end],数组为small[left,end-1],a[end],large[start,right]
+        swap(nums, left, end);//交换a和end,数组为small[left,end-1],a[end],large[start,right]
         if(k==end) {
             return nums[end];
-        }else if(k>=left&&k<=end-1){
+        }else if(k<end){
             return getMaxK(nums,left,end-1,k);
         }else{
             return getMaxK(nums,start,right,k);
@@ -50,7 +50,7 @@ public class day215数组中的第K个最大元素 {
     }
 
     public static void main(String[] args) {
-        int maxK = new day215数组中的第K个最大元素().findKthLargest(new int[]{2, 1}, 1);
+        int maxK = new day215数组中的第K个最大元素().findKthLargest(new int[]{3,2,1,5,6,4}, 2);
         System.out.println(maxK);
 
     }

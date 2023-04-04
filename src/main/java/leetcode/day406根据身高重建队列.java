@@ -3,7 +3,7 @@ package leetcode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 public class day406根据身高重建队列 {
 //    先对输入数组排序，h升序，k降序 从头循环遍历 当前这个人就是剩下未安排的人中最矮的人，他的k值就代表他在剩余空位的索引值 如果有多个人高度相同，要按照k值从大到小领取索引值
@@ -26,11 +26,30 @@ public class day406根据身高重建队列 {
         }
         return integersList.toArray(new int[integersList.size()][]);
     }
-
+    //优先队列PriorityQueue(堆排序)，h升序，k降序
+    public int[][] reconstructQueue2(int[][] people) {
+        PriorityQueue<int[]>  queue=new PriorityQueue<>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] a, int[] b) {
+                if (a[0] < b[0]) return 1;
+                if (a[0] == b[0] && a[1] > b[1]) return 1;
+                return -1;
+            }
+        });
+        for(int[] p:people){
+            queue.add(p);
+        }
+        ArrayList<int[]> integersList = new ArrayList<>();
+        while(!queue.isEmpty()){
+            int[] temp=queue.poll();
+            integersList.add(temp[1],temp);
+        }
+        return integersList.toArray(new int[integersList.size()][]);
+    }
     public static void main(String[] args) {
         day406根据身高重建队列 day406 = new day406根据身高重建队列();
         int[][] people = {{7, 0}, {4, 4}, {7, 1}, {5, 0}, {6, 1}, {5, 2}};
-        int[][] ints = day406.reconstructQueue(people);
+        int[][] ints = day406.reconstructQueue2(people);
         for(int[] ints1:ints){
             System.out.println(Arrays.toString(ints1));
         }

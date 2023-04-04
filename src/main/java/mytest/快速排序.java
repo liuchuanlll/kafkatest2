@@ -18,7 +18,7 @@ public class 快速排序 {//分割交换原理，
             }
         }// 结束刚好end+1=start。数组为a[left],small[left+1,end],large[start,right]
 
-        swap(array, left, end);
+        swap(array, left, end);//l移动至end元素位置
         if(end-1-left>1)//左边超过一个元素
             quickSort(array,left,end-1);
         if(right-start>1)//右边超过一个元素
