@@ -18,7 +18,7 @@ public class day347前K个高频元素 {
         quickSort(ints,0,ints.length-1,ints.length-k);
         int[] ints1 = new int[k];
         for(i=0;i<k;i++)
-            ints1[i]=ints[ints.length-i][1];
+            ints1[i]=ints[ints.length-i-1][0];
         return ints1;
     }
 
@@ -26,18 +26,19 @@ public class day347前K个高频元素 {
         int start=l+1;
         int end=r;
         while(start<=end){
-            while(array[l][1]<=array[start][1]) start++;
-            while(array[l][1]>array[end][1]) end--;
+            while(start<array.length&&start<=end&&array[l][1]>=array[start][1])
+                start++;
+            while(start<=end&&array[l][1]<array[end][1])
+                end--;
             if(start<end){
                 swap(array,start,end);
                 start++;end--;
             }
-            swap(array, l, end);
-
-            if(k>end)  quickSort(array,end+1, r, k);
-            if(k<end)  quickSort(array,l, end-1, k);
         }
+        swap(array, l, end);
 
+        if(k>end)  quickSort(array,end+1, r, k);
+        if(k<end)  quickSort(array,l, end-1, k);
     }
     public static void swap(int[][] array, int start, int end) {
         int[] temp = array[start];
@@ -69,8 +70,14 @@ public class day347前K个高频元素 {
         }
         int[] ints1 = new int[k];
         for(int i=0;i<k;i++)
-            ints1[i]=queue.poll()[1];
+            ints1[i]=queue.poll()[0];
         return ints1;
+    }
 
+    public static void main(String[] args) {
+        day347前K个高频元素 day347 = new day347前K个高频元素();
+        int[] nums = {5,3,1,1,1,3,73,1};
+        int[] ints = day347.topKFrequent(nums, 1);
+        System.out.println(Arrays.toString(ints));
     }
 }
