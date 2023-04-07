@@ -36,7 +36,13 @@ public class day394字符串解码 {
                     stringStack.push(stringStack.pop()+s1);
                 }
             }else if(c>='a'&&c<='z'){
-                while(c>='a'&&c<='z'&&i<s.length()) {ans=ans+s.charAt(i);i++;}
+                while(c>='a'&&c<='z'&&i<s.length()){
+                    ans=ans+s.charAt(i++);
+                    if(i>=s.length()){
+                        break;
+                    }
+                    c=s.charAt(i);
+                }
             }
         }
         return ans;
@@ -49,7 +55,7 @@ public class day394字符串解码 {
         return String.valueOf(stringBuffer);
     }
     public static void main(String[] args) {
-        String s="3[a2[c]]";
+        String s="4[2[jk]e1[f]";
         day394字符串解码 day394 = new day394字符串解码();
         String s1 = day394.decodeString(s);
         System.out.println(s1);
