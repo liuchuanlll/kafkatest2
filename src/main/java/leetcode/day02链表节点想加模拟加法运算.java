@@ -43,21 +43,7 @@ public class day02链表节点想加模拟加法运算 {
         if(a!=0){temp.next=new ListNode(a);}
         return  root.next;
     }
-
-    public static void main(String[] args) {
-        ListNode Node1=new ListNode(9,new ListNode(9,new ListNode(9,new ListNode(9,new ListNode(9)))));
-
-        ListNode Node2=new ListNode(9,new ListNode(9,new ListNode(9)));
-
-        ListNode listNode = addTwoNumbers(Node1, Node2);
-        while(listNode!=null){
-            System.out.println(listNode.val);
-            listNode=listNode.next;
-        }
-    }
-}
-class Solution {
-    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public static ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
         ListNode resListNode = new ListNode(-1);
         ListNode resListNodeTemp = resListNode;
         int temp = 0;
@@ -86,5 +72,17 @@ class Solution {
         }
 
         return resListNode.next;
+    }
+
+    public static void main(String[] args) {
+        ListNode Node1=new ListNode(9,new ListNode(9,new ListNode(9,new ListNode(9,new ListNode(9)))));
+
+        ListNode Node2=new ListNode(9,new ListNode(9,new ListNode(9)));
+
+        ListNode listNode = addTwoNumbers(Node1, Node2);
+        while(listNode!=null){
+            System.out.println(listNode.val);
+            listNode=listNode.next;
+        }
     }
 }

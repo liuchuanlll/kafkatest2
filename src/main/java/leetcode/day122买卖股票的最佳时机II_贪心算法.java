@@ -14,6 +14,9 @@ public class day122买卖股票的最佳时机II_贪心算法 {
         }
         return res;
     }
+    //动态规划dp[i][0]持有现金， dp[i][1]：持有股票
+//    dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1] + prices[i]);  按照昨天什么都不做，昨天卖掉了
+//    dp[i][1] = Math.max(dp[i-1][1], dp[i-1][0] - prices[i]);  按照昨天什么都不做，昨天买入掉了
     public int maxProfit2(int[] prices) {
 
         return 0;

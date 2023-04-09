@@ -1,6 +1,6 @@
 package leetcode;
 
-public class day121 {
+public class day121买卖股票的最佳时机 {
     // 第i天卖的最大利润=第i天的价格-前i-1天的最低值,若i天最低，最大利润为0，满足题目要求
     // max[i]=p[i]-min[0~i]
     // 前i天卖的最大李锐=max[前i-1天的最大利润,第i天卖的最大利润]
@@ -21,7 +21,7 @@ public class day121 {
     }
 
     public static void main(String[] args) {
-        int i = new day121().maxProfit(new int[]{7, 1, 5, 3, 6, 4});
+        int i = new day121买卖股票的最佳时机().maxProfit(new int[]{7, 1, 5, 3, 6, 4});
         System.out.println(i);
     }
 }
