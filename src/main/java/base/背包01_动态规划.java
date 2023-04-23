@@ -1,4 +1,4 @@
-package mytest;
+package base;
 
 public class 背包01_动态规划 {
 

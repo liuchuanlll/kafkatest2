@@ -1,4 +1,4 @@
-package mytest;
+package base;
 
 public class Singleton {
     private Singleton(){}

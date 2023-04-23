@@ -1,4 +1,4 @@
-package mytest;
+package base;
 
 /**
  * @author kfzx-liuc02
