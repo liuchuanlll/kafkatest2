@@ -7,6 +7,7 @@ public class 表达式计算 {
     //6-9*(4+3)  6 9 4 3 + * -
     //3*5+6      3 5 * 6 +
     //3+5*6      3 5 6 * +
+//    “3*(1+2*(5+2))+67+(2-15(22+4))”
     public List<String> change(String[] strings){
         List<String> listStr = new ArrayList<>();
         Stack<String> operatorSt = new Stack<>();
