@@ -1,7 +1,5 @@
 package leetcode;
 
-import sun.security.util.Length;
-
 /**
  * @author kfzx-liuc02
  * @version 1.0

@@ -60,19 +60,25 @@ public class 二叉树非递归遍历 {
                 curr=curr.left;
             }
             TreeNode pop = intSt.pop();
-            if(!intSt.empty()){
-                if(pop.right==prev||pop.right==null){//prev指向右子树
-                    result.add(pop.val);
-                    prev=pop;//prev指向右子树
-                }else{//prev指向左子树
-                    intSt.push(pop);
-                    curr=pop.right;
-                }
+
+            if(pop.right==prev||pop.right==null){//prev指向右子树
+                result.add(pop.val);
+                prev=pop;//prev指向右子树
+            }else{
+                intSt.push(pop);
+                curr=pop.right;
             }
         }
+
         return result;
     }
 
+    public static void main(String[] args) {
+        TreeNode treeNode = TreeNode.transTreeNode(new Integer[]{1, 2, 3,null,6});
+        二叉树非递归遍历 二叉树非递归遍历 = new 二叉树非递归遍历();
+        List<Integer> integers = 二叉树非递归遍历.postorderTraversal(treeNode);
+        System.out.println(integers);
+    }
 }
 class TreeNode {
     int val;
@@ -85,5 +91,23 @@ class TreeNode {
         this.left = left;
         this.right = right;
     }
-
+    public static TreeNode transTreeNode(Integer[] nums){
+        Queue<TreeNode> nodeList = new LinkedList<>();
+        TreeNode root = new TreeNode(nums[0]);
+        nodeList.add(root);
+        for(int i=1;i<nums.length;i+=2){
+            TreeNode pop = nodeList.poll();
+            if(nums[i]!=null){
+                TreeNode left = new TreeNode(nums[i]);
+                nodeList.add(left);
+                pop.left=left;
+            }
+            if(i+1<nums.length&&nums[i+1]!=null){
+                TreeNode right =new TreeNode(nums[i+1]);
+                nodeList.add(right);
+                pop.right=right;
+            }
+        }
+        return root;
+    }
 }

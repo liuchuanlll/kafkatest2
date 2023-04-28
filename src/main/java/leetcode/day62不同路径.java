@@ -1,7 +1,5 @@
 package leetcode;
 
-import jdk.management.resource.internal.inst.SocketOutputStreamRMHooks;
-
 public class day62不同路径 {
     //动态规划  dp[i][j]=dp[i-1][j]+dp[i][j-1] dp[i][0]=1  dp[0][j]=1
     public int uniquePaths(int m, int n) {
